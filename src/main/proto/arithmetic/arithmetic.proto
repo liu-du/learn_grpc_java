@@ -1,14 +1,22 @@
 syntax = "proto3";
 
-package pnd;
+package arithmetic;
 
-option java_package = "com.proto.pnd";
+option java_package = "com.proto.arithmetic";
 option java_multiple_files = true;
 
 message Number {
     int32 number = 1;
 }
 
+message Double {
+    double number = 1;
+}
+
 service PrimeNumberDecompositionService {
     rpc PrimeNumberDecomposition(Number) returns (stream Number) {};
+}
+
+service AverageService {
+    rpc Average(stream Number) returns (Double) {};
 }

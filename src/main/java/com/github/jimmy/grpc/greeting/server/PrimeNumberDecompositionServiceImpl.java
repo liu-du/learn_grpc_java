@@ -1,7 +1,7 @@
 package com.github.jimmy.grpc.greeting.server;
 
-import com.proto.pnd.Number;
-import com.proto.pnd.PrimeNumberDecompositionServiceGrpc;
+import com.proto.arithmetic.Number;
+import com.proto.arithmetic.PrimeNumberDecompositionServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
 public class PrimeNumberDecompositionServiceImpl extends PrimeNumberDecompositionServiceGrpc.PrimeNumberDecompositionServiceImplBase {

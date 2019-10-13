@@ -1,8 +1,9 @@
-package com.github.jimmy.grpc.greeting.common;
+package com.github.jimmy.grpc.greeting.client;
 
-import com.proto.pnd.Number;
-import com.proto.pnd.PrimeNumberDecompositionServiceGrpc;
-import com.proto.pnd.PrimeNumberDecompositionServiceGrpc.PrimeNumberDecompositionServiceBlockingStub;
+import com.github.jimmy.grpc.greeting.common.Channel;
+import com.proto.arithmetic.Number;
+import com.proto.arithmetic.PrimeNumberDecompositionServiceGrpc;
+import com.proto.arithmetic.PrimeNumberDecompositionServiceGrpc.PrimeNumberDecompositionServiceBlockingStub;
 
 public class PrimeNumberDecompositionClient extends Channel {
     public static void main(String[] args) {

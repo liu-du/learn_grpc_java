@@ -1,5 +1,6 @@
-package com.github.jimmy.grpc.greeting.common;
+package com.github.jimmy.grpc.greeting.client;
 
+import com.github.jimmy.grpc.greeting.common.Channel;
 import com.proto.greet.GreetRequest;
 import com.proto.greet.GreetResponse;
 import com.proto.greet.GreetServiceGrpc;
