@@ -23,6 +23,6 @@ service GreetService {
 
     rpc GreetManyTimes(GreetRequest) returns (stream GreetResponse) {};
 
-//    rpc LongGreet(stream GreetRequest) returns (GreetResponse) {};
+    rpc LongGreet(stream GreetRequest) returns (GreetResponse) {};
 }
 
