@@ -23,3 +23,11 @@ service GreetService {
 
     rpc GreetManyTimes(GreetRequest) returns (stream GreetResponse) {};
 }
+
+message Number {
+    int32 number = 1;
+}
+
+service PrimeNumberDecompositionService {
+    rpc PrimeNumberDecomposition(Number) returns (stream Number) {};
+}

@@ -4,20 +4,13 @@ import com.proto.greet.GreetRequest;
 import com.proto.greet.GreetResponse;
 import com.proto.greet.GreetServiceGrpc;
 import com.proto.greet.Greeting;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 
 import java.util.Iterator;
 
-public class GreetingClient {
+public class GreetingClient extends WithChannel {
     public static void main(String[] args) {
 
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051)
-                .usePlaintext()
-                .build();
-
         GreetServiceGrpc.GreetServiceBlockingStub syncClient = GreetServiceGrpc.newBlockingStub(channel);
-
 
         GreetRequest request = GreetRequest.newBuilder()
                 .setGreeting(
