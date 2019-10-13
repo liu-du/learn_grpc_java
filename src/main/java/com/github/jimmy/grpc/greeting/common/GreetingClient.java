@@ -1,13 +1,12 @@
-package com.github.jimmy.grpc.greeting.client;
+package com.github.jimmy.grpc.greeting.common;
 
 import com.proto.greet.GreetRequest;
 import com.proto.greet.GreetResponse;
 import com.proto.greet.GreetServiceGrpc;
 import com.proto.greet.Greeting;
-
 import java.util.Iterator;
 
-public class GreetingClient extends WithChannel {
+public class GreetingClient extends Channel {
     public static void main(String[] args) {
 
         GreetServiceGrpc.GreetServiceBlockingStub syncClient = GreetServiceGrpc.newBlockingStub(channel);
