@@ -6,6 +6,7 @@ import com.proto.greet.GreetServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
 public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
+
     @Override
     public void greet(GreetRequest request, StreamObserver<GreetResponse> responseObserver) {
         GreetResponse response = GreetResponse.newBuilder()
@@ -71,4 +72,37 @@ public class GreetServiceImpl extends GreetServiceGrpc.GreetServiceImplBase {
 
         return requestObserver;
     }
+
+    @Override
+    public StreamObserver<GreetRequest> greetEveryOne(StreamObserver<GreetResponse> responseObserver) {
+        StreamObserver<GreetRequest> requestObserver = new StreamObserver<GreetRequest>() {
+
+            @Override
+            public void onNext(GreetRequest value) {
+                // client sends a message
+                System.out.println("receiving a streaming request.");
+                System.out.println("sending   a streaming response.");
+                responseObserver.onNext(
+                        GreetResponse.newBuilder()
+                                .setResult("Hello " + value.getGreeting().getFirstName() + " " + value.getGreeting().getLastName() + " "
+                        ).build()
+                );
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                // client sends an error
+
+            }
+
+            @Override
+            public void onCompleted() {
+                // client is down
+                System.out.println("client told server it's done.");
+                responseObserver.onCompleted();
+            }
+        };
+        return requestObserver;
+    }
+
 }
