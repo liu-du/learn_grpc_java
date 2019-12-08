@@ -99,7 +99,7 @@ public class GreetingClient extends Channel {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("stream message 2");
+        System.out.println("stream message 3");
         requestObserver.onNext(
                 GreetRequest.newBuilder()
                         .setGreeting(
@@ -136,15 +136,13 @@ public class GreetingClient extends Channel {
             @Override
             public void onError(Throwable t) {
                 // server send an error
-
             }
 
             @Override
             public void onCompleted() {
                 // server done
-                System.out.println("server told client it's done");
+                System.out.println("server notifies completion");
                 latch2.countDown();
-
             }
         });
 
