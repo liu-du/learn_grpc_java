@@ -120,5 +120,93 @@ public class GreetingClient extends Channel {
             e.printStackTrace();
         }
 
+        // 4. client streaming
+        System.out.println("Client streaming");
+
+        CountDownLatch latch2 = new CountDownLatch(1);
+
+        StreamObserver<GreetRequest> requestObserver2 = asyncClient.greetEveryOne(new StreamObserver<GreetResponse>() {
+            @Override
+            public void onNext(GreetResponse value) {
+                // server send an response
+                System.out.println("received response from server:");
+                System.out.println(value.getResult());
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                // server send an error
+
+            }
+
+            @Override
+            public void onCompleted() {
+                // server done
+                System.out.println("server told client it's done");
+                latch2.countDown();
+
+            }
+        });
+
+        // stream #1
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("stream message 1");
+        requestObserver2.onNext(
+                GreetRequest.newBuilder()
+                        .setGreeting(
+                                Greeting.newBuilder()
+                                        .setFirstName("Dwyane")
+                                        .setLastName("Wade")
+                                        .build()
+                        ).build()
+        );
+
+        // stream #2
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("stream message 2");
+        requestObserver2.onNext(
+                GreetRequest.newBuilder()
+                        .setGreeting(
+                                Greeting.newBuilder()
+                                        .setFirstName("Lebron")
+                                        .setLastName("James")
+                                        .build()
+                        ).build()
+        );
+
+        // stream #3
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("stream message 3");
+        requestObserver2.onNext(
+                GreetRequest.newBuilder()
+                        .setGreeting(
+                                Greeting.newBuilder()
+                                        .setFirstName("Kobe")
+                                        .setLastName("Bryant")
+                                        .build()
+                        ).build()
+        );
+
+        // tell the server we're done
+        System.out.println("streaming completed");
+        requestObserver2.onCompleted();
+
+        try {
+            latch2.await(3L, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
